@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:simple_budget/data/date_time/date_time_helper.dart';
 import 'package:simple_budget/models/expense_models/expense_models.dart';
 
-class ExpenseData {
+class ExpenseData extends ChangeNotifier {
   //* List of all expenses.
   List<ExpenseModel> overallExpenseList = [];
 
@@ -13,6 +14,7 @@ class ExpenseData {
   //* Add new expense.
   void addNewExpense(ExpenseModel newExpenseModel) {
     overallExpenseList.add(newExpenseModel);
+    notifyListeners();
   }
 
   //* Delete expense.
@@ -75,5 +77,10 @@ class ExpenseData {
       }
     }
     return dailyExpenseSummary;
+  }
+
+  @override
+  void notifyListeners() {
+    super.notifyListeners();
   }
 }
