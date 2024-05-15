@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_budget/Widgets/ui/list_tile_ui.dart';
 import 'package:simple_budget/Widgets/ui/text_input_ui.dart';
 import 'package:simple_budget/Widgets/ui/text_ui.dart';
 import 'package:simple_budget/constants/string.dart';
@@ -44,26 +47,25 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Consumer<ExpenseData>(
       builder: (context, value, child) => Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const TextUI(
-            label: home,
-          ),
-        ),
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: ListView.builder(
-            itemCount: value.getAllExpenseList().length,
-            itemBuilder: (context, index) => ListTile(
-              title: TextUI(label: value.getAllExpenseList()[index].name),
-              subtitle: TextUI(
-                label: value.getAllExpenseList()[index].dateTime.toString(),
+            padding: const EdgeInsets.all(16.0),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 16),
+                    itemCount: value.getAllExpenseList().length,
+                    itemBuilder: (context, index) => ListTileUI(
+                        title: value.getAllExpenseList()[index].name,
+                        dateTime: value.getAllExpenseList()[index].dateTime,
+                        trailing: value.getAllExpenseList()[index].amount),
+                  ),
+                ],
               ),
-              trailing:
-                  TextUI(label: '\$${value.getAllExpenseList()[index].amount}'),
-            ),
-          ),
-        ),
+            )),
         floatingActionButton: FloatingActionButton(
           onPressed: () => showDialog(
             context: context,
