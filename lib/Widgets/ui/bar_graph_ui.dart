@@ -1,5 +1,4 @@
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_budget/Widgets/bar_graph/bar_data.dart';
 import 'package:simple_budget/Widgets/ui/text_ui.dart';
@@ -88,9 +87,6 @@ class BarGraphUI extends StatelessWidget {
 }
 
 Widget getBottomTiles(double value, TitleMeta meta) {
-  if (kDebugMode) {
-    print("Value ===> $value");
-  }
   Widget text;
   switch (value.toInt()) {
     case 0:

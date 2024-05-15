@@ -57,7 +57,9 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.all(16.0),
             child: ListView(
               children: [
-                ExpenseSummary(startOfWeek: value.startOfWeekDate()),
+                ExpenseSummary(
+                  startOfWeek: value.startOfWeekDate(),
+                ),
                 const SizedBox(height: 20),
                 ListView.separated(
                   shrinkWrap: true,
@@ -66,9 +68,10 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(height: 16),
                   itemCount: value.getAllExpenseList().length,
                   itemBuilder: (context, index) => ListTileUI(
-                      title: value.getAllExpenseList()[index].name,
-                      dateTime: value.getAllExpenseList()[index].dateTime,
-                      trailing: value.getAllExpenseList()[index].amount),
+                    title: value.getAllExpenseList()[index].name,
+                    dateTime: value.getAllExpenseList()[index].dateTime,
+                    trailing: value.getAllExpenseList()[index].amount,
+                  ),
                 ),
               ],
             )),

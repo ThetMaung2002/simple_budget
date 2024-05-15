@@ -26,17 +26,17 @@ class BarData {
       //* Sunday
       IndividualBar(x: 0, y: sunAmount),
       //* Monday
-      IndividualBar(x: 0, y: monAmount),
+      IndividualBar(x: 1, y: monAmount),
       //* Tuesday
-      IndividualBar(x: 0, y: tueAmount),
+      IndividualBar(x: 2, y: tueAmount),
       //* Wednesday
-      IndividualBar(x: 0, y: wedAmount),
+      IndividualBar(x: 3, y: wedAmount),
       //* Thursday
-      IndividualBar(x: 0, y: thuAmount),
+      IndividualBar(x: 4, y: thuAmount),
       //* Friday
-      IndividualBar(x: 0, y: friAmount),
+      IndividualBar(x: 5, y: friAmount),
       //* Saturday
-      IndividualBar(x: 0, y: satAmount),
+      IndividualBar(x: 6, y: satAmount),
     ];
   }
 }
