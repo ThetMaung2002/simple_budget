@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_budget/data/expense_data/expense_data.dart';
 import 'package:simple_budget/page/home_page.dart';
 import 'package:simple_budget/providers/theme_provider/theme_provider.dart';
 
-void main() {
+void main() async {
+  //* Initialize Local Database
+  await Hive.initFlutter();
+
+  //* Open Hive box
+  await Hive.openBox("expense_database");
+
   WidgetsFlutterBinding.ensureInitialized();
   runApp(ChangeNotifierProvider(
     create: (context) => ThemeProvider(),

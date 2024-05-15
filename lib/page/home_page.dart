@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_budget/Widgets/shared/expense_summary.dart';
 import 'package:simple_budget/Widgets/ui/list_tile_ui.dart';
@@ -21,23 +19,37 @@ class _HomePageState extends State<HomePage> {
   TextEditingController addExpenseName = TextEditingController();
   TextEditingController addExpenseAmount = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+
+    //Prepare data on start up
+    Provider.of<ExpenseData>(context, listen: false).prepareData();
+  }
+
   void save() {
-    //Create new expense item
-    ExpenseModel newExpense = ExpenseModel(
-      name: addExpenseName.text,
-      amount: addExpenseAmount.text,
-      dateTime: DateTime.now(),
-    );
+    if (addExpenseName.text.isNotEmpty && addExpenseAmount.text.isNotEmpty) {
+      //Create new expense item
+      ExpenseModel newExpense = ExpenseModel(
+        name: addExpenseName.text,
+        amount: addExpenseAmount.text,
+        dateTime: DateTime.now(),
+      );
 
-    // Add the new expense
-    Provider.of<ExpenseData>(context, listen: false).addNewExpense(newExpense);
-
+      // Add the new expense
+      Provider.of<ExpenseData>(context, listen: false)
+          .addNewExpense(newExpense);
+    }
     // Clear the textfields
     addExpenseName.clear();
     addExpenseAmount.clear();
 
     // POP!
     Navigator.pop(context);
+  }
+
+  void deleteExpense(ExpenseModel expense) {
+    Provider.of<ExpenseData>(context, listen: false).deleteNewExpense(expense);
   }
 
   void cancel() {
@@ -71,6 +83,9 @@ class _HomePageState extends State<HomePage> {
                     title: value.getAllExpenseList()[index].name,
                     dateTime: value.getAllExpenseList()[index].dateTime,
                     trailing: value.getAllExpenseList()[index].amount,
+                    deleteTapped: (p0) => deleteExpense(
+                      value.getAllExpenseList()[index],
+                    ),
                   ),
                 ),
               ],
