@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_budget/data/date_time/date_time_helper.dart';
+import 'package:simple_budget/data/db/hive_database.dart';
 import 'package:simple_budget/models/expense_models/expense_models.dart';
 
 class ExpenseData extends ChangeNotifier {
@@ -11,15 +12,27 @@ class ExpenseData extends ChangeNotifier {
     return overallExpenseList;
   }
 
+  //* Prepare data to display
+  final db = HiveDatabase();
+  void prepareData() {
+    // If there is data
+    if (db.readData().isNotEmpty) {
+      overallExpenseList = db.readData();
+    }
+  }
+
   //* Add new expense.
   void addNewExpense(ExpenseModel newExpenseModel) {
     overallExpenseList.add(newExpenseModel);
+    db.saveData(overallExpenseList);
     notifyListeners();
   }
 
   //* Delete expense.
   void deleteNewExpense(ExpenseModel expenseModel) {
     overallExpenseList.remove(expenseModel);
+    db.saveData(overallExpenseList);
+    notifyListeners();
   }
 
   //* Get weekday (mon, tue, etc...) from a datetime object.
