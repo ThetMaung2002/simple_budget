@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_budget/data/expense_data/expense_data.dart';
 import 'package:simple_budget/page/home_page.dart';
 import 'package:simple_budget/providers/theme_provider/theme_provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(ChangeNotifierProvider(
     create: (context) => ThemeProvider(),
     child: const MyApp(),
@@ -15,13 +17,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => ThemeProvider(),
-        ),
-      ],
-      child: MaterialApp(
+    return ChangeNotifierProvider(
+      create: (context) => ExpenseData(),
+      builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
         home: const HomePage(),
         theme: Provider.of<ThemeProvider>(context).themeData,
