@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_budget/Widgets/shared/expense_summary.dart';
 import 'package:simple_budget/Widgets/ui/list_tile_ui.dart';
 import 'package:simple_budget/Widgets/ui/text_input_ui.dart';
 import 'package:simple_budget/Widgets/ui/text_ui.dart';
@@ -40,6 +41,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   void cancel() {
+    // Clear the textfields
+    addExpenseName.clear();
+    addExpenseAmount.clear();
+
+    // POP!
     Navigator.pop(context);
   }
 
@@ -49,22 +55,22 @@ class _HomePageState extends State<HomePage> {
       builder: (context, value, child) => Scaffold(
         body: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  ListView.separated(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 16),
-                    itemCount: value.getAllExpenseList().length,
-                    itemBuilder: (context, index) => ListTileUI(
-                        title: value.getAllExpenseList()[index].name,
-                        dateTime: value.getAllExpenseList()[index].dateTime,
-                        trailing: value.getAllExpenseList()[index].amount),
-                  ),
-                ],
-              ),
+            child: ListView(
+              children: [
+                ExpenseSummary(startOfWeek: value.startOfWeekDate()),
+                const SizedBox(height: 20),
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 16),
+                  itemCount: value.getAllExpenseList().length,
+                  itemBuilder: (context, index) => ListTileUI(
+                      title: value.getAllExpenseList()[index].name,
+                      dateTime: value.getAllExpenseList()[index].dateTime,
+                      trailing: value.getAllExpenseList()[index].amount),
+                ),
+              ],
             )),
         floatingActionButton: FloatingActionButton(
           onPressed: () => showDialog(

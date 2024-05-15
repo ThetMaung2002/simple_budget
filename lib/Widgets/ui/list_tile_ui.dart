@@ -33,7 +33,7 @@ class ListTileUI extends StatelessWidget {
         ),
         padding: const EdgeInsets.all(8.0),
         child: TextUI(
-          label: "$trailing kyat",
+          label: "\$$trailing",
           size: 16,
           color: primaryFgColor,
         ),
