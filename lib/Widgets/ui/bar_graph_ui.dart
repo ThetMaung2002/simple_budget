@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_budget/Widgets/bar_graph/bar_data.dart';
 import 'package:simple_budget/Widgets/ui/text_ui.dart';
+import 'package:simple_budget/constants/string.dart';
 import 'package:simple_budget/constants/theme_constants/light_theme_constants.dart';
 
 class BarGraphUI extends StatelessWidget {
@@ -90,28 +91,28 @@ Widget getBottomTiles(double value, TitleMeta meta) {
   Widget text;
   switch (value.toInt()) {
     case 0:
-      text = const TextUI(label: "Sun");
+      text = const TextUI(label: kSun);
       break;
     case 1:
-      text = const TextUI(label: "Mon");
+      text = const TextUI(label: kMon);
       break;
     case 2:
-      text = const TextUI(label: "Tue");
+      text = const TextUI(label: kTue);
       break;
     case 3:
-      text = const TextUI(label: "Wed");
+      text = const TextUI(label: kWed);
       break;
     case 4:
-      text = const TextUI(label: "Thu");
+      text = const TextUI(label: kThu);
       break;
     case 5:
-      text = const TextUI(label: "Fri");
+      text = const TextUI(label: kFri);
       break;
     case 6:
-      text = const TextUI(label: "Sat");
+      text = const TextUI(label: kSat);
       break;
     default:
-      text = const TextUI(label: "");
+      text = const TextUI(label: kEmpty);
   }
 
   return SideTitleWidget(axisSide: meta.axisSide, child: text);
