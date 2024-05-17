@@ -4,6 +4,8 @@ import 'package:simple_budget/Widgets/shared/expense_summary.dart';
 import 'package:simple_budget/Widgets/ui/list_tile_ui.dart';
 import 'package:simple_budget/Widgets/ui/text_input_ui.dart';
 import 'package:simple_budget/Widgets/ui/text_ui.dart';
+import 'package:simple_budget/constants/padding.dart';
+import 'package:simple_budget/constants/sized_box.dart';
 import 'package:simple_budget/constants/string.dart';
 import 'package:simple_budget/data/expense_data/expense_data.dart';
 import 'package:simple_budget/models/expense_models/expense_models.dart';
@@ -66,18 +68,18 @@ class _HomePageState extends State<HomePage> {
     return Consumer<ExpenseData>(
       builder: (context, value, child) => Scaffold(
         body: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(kDefaultPadding),
             child: ListView(
               children: [
                 ExpenseSummary(
                   startOfWeek: value.startOfWeekDate(),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: kDefaultHeight),
                 ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   separatorBuilder: (context, index) =>
-                      const SizedBox(height: 16),
+                      const SizedBox(height: kDefaultPadding),
                   itemCount: value.getAllExpenseList().length,
                   itemBuilder: (context, index) => ListTileUI(
                     title: value.getAllExpenseList()[index].name,
@@ -104,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                     hintText: expenseName,
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: kDefaultHeight,
                   ),
                   TextInputUI(
                     keyboardType: TextInputType.number,

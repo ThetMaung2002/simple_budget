@@ -12,7 +12,7 @@ class ButtonUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(
-        padding: defaultSize,
+        padding: const EdgeInsets.all(kDefaultPadding),
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
         shape: RoundedRectangleBorder(

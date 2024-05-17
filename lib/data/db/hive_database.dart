@@ -8,8 +8,8 @@ class HiveDatabase {
   //* Write data
   void saveData(List<ExpenseModel> allExpense) {
     /*
-        Hive can only store strings and dateTime. And not custom object.
-        Convert ExpenseItem object to types that can be stored in our db.
+        * Hive can only store strings and dateTime. And not custom object.
+        * Convert ExpenseItem object to types that can be stored in our db.
     */
 
     List<List<dynamic>> allExpenseFormatted = [];
